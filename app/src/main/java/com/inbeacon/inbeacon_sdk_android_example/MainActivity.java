@@ -21,6 +21,11 @@ public class MainActivity extends Activity {
     private static final String TAG = "MainActivity";
 
     private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+        /**
+         * Receive events from the inBeacon SDK
+         * @param context
+         * @param intent
+         */
         @Override
         public void onReceive(Context context, Intent intent) {
             // Get extra data included in the Intent
@@ -34,7 +39,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // lets see if the device is capable
+        // lets see if the device is capable.
         VerifiedCapability verifiedCaps=InbeaconManager.getSharedInstance().verifyCapabilities();
         if (verifiedCaps!=VerifiedCapability.CAP_OK) {
             switch (verifiedCaps) {
@@ -56,18 +61,18 @@ public class MainActivity extends Activity {
             Log.w(TAG,"This device supports iBeacons and the inBeacon SDK");
 
 
-        // get all notifications
+        // get all notifications from the inBeacon SDK to our messagereceive defined above
         IntentFilter myIntentFilter=new IntentFilter();
-        myIntentFilter.addAction("com.inbeacon.sdk.event.enterregion");
-        myIntentFilter.addAction("com.inbeacon.sdk.event.exitregion");
-        myIntentFilter.addAction("com.inbeacon.sdk.event.enterlocation");
-        myIntentFilter.addAction("com.inbeacon.sdk.event.exitlocation");
-        myIntentFilter.addAction("com.inbeacon.sdk.event.regionsupdate");
-        myIntentFilter.addAction("com.inbeacon.sdk.event.enterproximity");
-        myIntentFilter.addAction("com.inbeacon.sdk.event.exitproximity");
-        myIntentFilter.addAction("com.inbeacon.sdk.event.proximity");
-        myIntentFilter.addAction("com.inbeacon.sdk.event.appevent");
-        myIntentFilter.addAction("com.inbeacon.sdk.event.appaction");
+        myIntentFilter.addAction("com.inbeacon.sdk.event.enterregion");     // user entered a region
+        myIntentFilter.addAction("com.inbeacon.sdk.event.exitregion");      // user left a region
+        myIntentFilter.addAction("com.inbeacon.sdk.event.enterlocation");   // user entered a location
+        myIntentFilter.addAction("com.inbeacon.sdk.event.exitlocation");    // user left a location
+        myIntentFilter.addAction("com.inbeacon.sdk.event.regionsupdate");   // region definitions were updated
+        myIntentFilter.addAction("com.inbeacon.sdk.event.enterproximity");  // user entered a beacon proximity
+        myIntentFilter.addAction("com.inbeacon.sdk.event.exitproximity");   // user left a beacon proximity
+        myIntentFilter.addAction("com.inbeacon.sdk.event.proximity");       // low level proximity update, once every second when beacons are around
+        myIntentFilter.addAction("com.inbeacon.sdk.event.appevent");        // defined in the backend for special app-specific pages to show
+        myIntentFilter.addAction("com.inbeacon.sdk.event.appaction");       // defined in the backend to handle your own local notifications
         LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,
                 myIntentFilter );
 
