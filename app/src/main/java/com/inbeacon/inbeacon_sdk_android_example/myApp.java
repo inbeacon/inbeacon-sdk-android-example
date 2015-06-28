@@ -1,15 +1,9 @@
 package com.inbeacon.inbeacon_sdk_android_example;
 
 import android.app.Application;
-import android.util.Log;
-
 import com.inbeacon.sdk.InbeaconManager;
-
 import java.util.HashMap;
 
-/**
- * Created by rvw on 7-10-2014.
- */
 public class myApp extends Application {
     private static final String TAG = "myApp";
 
