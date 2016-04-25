@@ -14,10 +14,10 @@ public class myApp extends Application {
         InbeaconManager.initialize(this, "demo", "QmE3WWlMNUluUnp2Y2h1MUF4NFpJQ01aZ2ZCRnVGbng");
         //
         // If you have user credentials somewhere in your app, you can attach the account
-        HashMap<String, String> user=new HashMap<String, String>();
-        user.put("name","Dwight Schulz");
-        user.put("email","dwight@ateam.com");
-        InbeaconManager.getSharedInstance().attachUser(user);
+        //        HashMap<String, String> user=new HashMap<String, String>();
+        //        user.put("name","Dwight Schulz");                 // example only! don't use these in your own app
+        //        user.put("email","dwight@ateam.com");
+        //        InbeaconManager.getSharedInstance().attachUser(user);
 
         // refresh data from server. Call this after attachuser, so everything is updated.
         InbeaconManager.getSharedInstance().refresh();
